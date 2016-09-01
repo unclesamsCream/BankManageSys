@@ -31,10 +31,10 @@ DROP TABLE IF EXISTS `operation`;
 CREATE TABLE `operation` (
   `card_number` varchar(20) NOT NULL,
   `type` bigint(255) NOT NULL,
-  `residual` bigint(255) NOT NULL,
+  `residual` float(20,2) NOT NULL,
   `transaction_to` varchar(20) NOT NULL,
   `transaction_from` varchar(20) NOT NULL,
-  `transaction_amount` bigint(255) NOT NULL,
+  `transaction_amount` float(20,2) NOT NULL,
   `deal_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -61,7 +61,7 @@ CREATE TABLE `users` (
   `name` varchar(20) DEFAULT NULL,
   `id` varchar(20) DEFAULT NULL,
   `type` tinyint(10) DEFAULT NULL,
-  `residual` bigint(255) DEFAULT NULL,
+  `residual` float(20,2) DEFAULT NULL,
   `rate` tinyint(10) DEFAULT NULL,
   `password` varchar(6) DEFAULT NULL,
   `address` varchar(140) DEFAULT NULL,

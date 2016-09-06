@@ -4,8 +4,52 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <display-name></display-name>	
+  <display-name></display-name>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>userLoginServlet</servlet-name>
+    <servlet-class>servlet.userLoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>userDeposit</servlet-name>
+    <servlet-class>servlet.userDeposit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>userDoposit</servlet-name>
+    <servlet-class>servlet.userDoposit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>userWithdraw</servlet-name>
+    <servlet-class>servlet.userWithdraw</servlet-class>
+  </servlet>
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>userLoginServlet</servlet-name>
+    <url-pattern>/servlet/userLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userDeposit</servlet-name>
+    <url-pattern>/servlet/userDeposit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userDoposit</servlet-name>
+    <url-pattern>/servlet/userDoposit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>userWithdraw</servlet-name>
+    <url-pattern>/servlet/userWithdraw</url-pattern>
+  </servlet-mapping>	
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

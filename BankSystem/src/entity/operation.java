@@ -1,3 +1,4 @@
+
 package entity;
 
 import java.util.Date;
@@ -31,8 +32,8 @@ public class operation {
 		return residual;
 	}
 
-	public void setResidual(float residual) {
-		this.residual = residual;
+	public void setResidual(float d) {
+		this.residual = d;
 	}
 
 	public String getTransaction_to() {

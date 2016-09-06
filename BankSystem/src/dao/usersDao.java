@@ -14,6 +14,40 @@ import entity.users;
  * */
 public class usersDao {
 	
+	// 查询是否有足够的余额
+	public boolean checkResidual(String account, float amount) throws SQLException
+	{
+		Connection conn = DBUtil.getConnection();
+		String sql = " " +
+					" select residual from users where account=? ;";
+		PreparedStatement pre = conn.prepareStatement(sql);
+		pre.setString(1, account);
+		ResultSet rs = pre.executeQuery();
+		if(rs.next() && amount <= rs.getFloat("residual"))
+			return true;
+		else 
+			return false;
+		
+	}
+			
+	
+	// 查询是否有此账号
+	public boolean checkAccount(String account, String password) throws SQLException
+	{
+		Connection conn = DBUtil.getConnection();
+		String sql = " " + 
+				" select password from users where account=? ;";
+		PreparedStatement pre = conn.prepareStatement(sql);
+		pre.setString(1, account);
+		ResultSet rs = pre.executeQuery();
+		if(rs.next() && password.equals( rs.getString("password")) )
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	// 开户，添加新的用户
 	public boolean NewUser(users u) throws SQLException
 	{
@@ -175,26 +209,30 @@ public class usersDao {
 	public static void main(String[] args) throws SQLException {
 		usersDao ud = new usersDao();
 		
-		users u = new users();
-		u.setAccount("123456");
-		u.setAddress("大青海");
-		u.setEmail("123@123.com");
-		u.setId("632223199510270576");
-		u.setName("tangrui");
-		u.setPassword("951027");
-		u.setRate((byte) 5);
-		u.setResidual((float) 95584.25);
-		u.setType((byte) 1);
-		//ud.NewUser(u);
+//		users u = new users();
+//		u.setAccount("123456");
+//		u.setAddress("大青海");
+//		u.setEmail("123@123.com");
+//		u.setId("632223199510270576");
+//		u.setName("tangrui");
+//		u.setPassword("951027");
+//		u.setRate((byte) 5);
+//		u.setResidual((float) 95584.25);
+//		u.setType((byte) 1);
+//		//ud.NewUser(u);
+//		
+//		
+//		//ud.DelUser("123456");
+//		
+//		u.setName("lalalal");
+//		
+//		ud.ModifyUser(u);
+//		System.out.println(ud.ViewUser("132").getName());
+//		System.out.println(ud.QueryUser("", "", "青海"));
+//		ud.ModifyPassword("asdf", "1324", "666223");
 		
+//		System.out.println(ud.checkAccount("123", "951027"));;
+		System.out.println(ud.checkResidual("321", 10200));
 		
-		//ud.DelUser("123456");
-		
-		u.setName("lalalal");
-		
-		ud.ModifyUser(u);
-		System.out.println(ud.ViewUser("132").getName());
-		System.out.println(ud.QueryUser("", "", "青海"));
-		ud.ModifyPassword("asdf", "1324", "666223");
 	}
 }

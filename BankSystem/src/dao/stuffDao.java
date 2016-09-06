@@ -10,8 +10,26 @@ import entity.stuff;
 
 public class stuffDao {
 	
+	// 查询是否有此账号
+	public boolean checkAccount(String account, String password) throws SQLException
+	{
+		Connection conn = DBUtil.getConnection();
+		String sql = " " + 
+				" select password from stuff where account=? ;";
+		PreparedStatement pre = conn.prepareStatement(sql);
+		pre.setString(1, account);
+		ResultSet rs = pre.executeQuery();
+		if(rs.next() && password.equals(rs.getString("password")) )
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
 	// 新增员工
-	public boolean NewStuff(stuff s) throws SQLException
+	public boolean newStuff(stuff s) throws SQLException
 	{
 		Connection conn = DBUtil.getConnection();
 		String sql = " " +
@@ -21,12 +39,12 @@ public class stuffDao {
 		PreparedStatement pre = conn.prepareStatement(sql);
 		
 		pre.setString(1, s.getAccount());
-		pre.setByte(2, s.getModifiable());
+		pre.setString(2, s.getPassword());
 		pre.setByte(3, s.getOpenable());
-		pre.setByte(4, s.getQueryable());
-		pre.setByte(5, s.getCloseable());
-		pre.setByte(7, s.getViewable());
-		pre.setString(6, s.getPassword());
+		pre.setByte(4, s.getCloseable());
+		pre.setByte(5, s.getModifiable());
+		pre.setByte(6, s.getViewable());
+		pre.setByte(7, s.getQueryable());
 		pre.execute();
 		
 		return true;
@@ -37,7 +55,7 @@ public class stuffDao {
 	{
 		Connection conn = DBUtil.getConnection();
 		String sql = " " + 	
-					" delete from users " + 
+					" delete from stuff " + 
 					" where account=? ;";
 		PreparedStatement pre = conn.prepareStatement(sql);
 		
@@ -53,16 +71,16 @@ public class stuffDao {
 		Connection conn = DBUtil.getConnection();
 		String sql = " " + 
 					" update stuff " +
-					" account=?, password=?, openable=?, closeable=?,  modifiable=?, viewable=?, queryable=?" +
+					" set account=?, password=?, openable=?, closeable=?,  modifiable=?, viewable=?, quaryable=?" +
 					" where account=? ;";
 		PreparedStatement pre = conn.prepareStatement(sql);
 		pre.setString(1, s.getAccount());
 		pre.setString(2, s.getPassword());
-		pre.setByte(3, s.getCloseable());
-		pre.setByte(4, s.getModifiable());
-		pre.setByte(5, s.getOpenable());
-		pre.setByte(6, s.getQueryable());
-		pre.setByte(7, s.getViewable());
+		pre.setByte(3, s.getOpenable());
+		pre.setByte(4, s.getCloseable());
+		pre.setByte(5, s.getModifiable());
+		pre.setByte(6, s.getViewable());
+		pre.setByte(7, s.getQueryable());
 		pre.setString(8, s.getAccount());
 		pre.execute();
 		
@@ -87,7 +105,7 @@ public class stuffDao {
 			s.setModifiable(rs.getByte("modifiable"));
 			s.setOpenable(rs.getByte("openable"));
 			s.setPassword(rs.getString("password"));
-			s.setQueryable(rs.getByte("queryable"));
+			s.setQueryable(rs.getByte("quaryable"));
 			s.setViewable(rs.getByte("viewable"));
 			return s;
 		}
@@ -95,5 +113,24 @@ public class stuffDao {
 		return null;
 	}
 	
-	
+	public static void main(String[] args) throws SQLException {
+//		stuff s = new stuff();
+//		s.setAccount("12346");
+//		s.setCloseable((byte)1);
+//		s.setModifiable((byte)1);
+//		s.setOpenable((byte)1);
+//		s.setPassword("123456");
+//		s.setQueryable((byte)1);
+//		s.setViewable((byte)1);
+//		
+//		//sd.newStuff(s);
+////		sd.DelStuff("12346");
+//		s.setCloseable((byte)0);
+//		//sd.ModifyStuff(s);
+//		System.out.println(sd.QueryStuff("12346").toString());
+		stuffDao sd = new stuffDao();
+		System.out.println(sd.checkAccount("666666", "951027"));;
+		
+		
+	}
 }
